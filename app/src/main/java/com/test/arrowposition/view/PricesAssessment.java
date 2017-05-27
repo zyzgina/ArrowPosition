@@ -12,7 +12,7 @@ import com.test.arrowposition.R;
 import java.util.List;
 
 /**
- * Created by Doris on 2017/5/26.
+ * Created by on 2017/5/26.
  */
 
 public class PricesAssessment extends PercentRelativeLayout {
