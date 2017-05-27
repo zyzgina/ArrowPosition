@@ -137,10 +137,14 @@ public class PricesAssessment extends PercentRelativeLayout {
             normalText = this.normalnOffer.getText().toString();
         PercentRelativeLayout.LayoutParams layoutParams = (LayoutParams) this.normalnOffer.getLayoutParams();
         float widthNormal = getTextWidth(this.normalnOffer, normalText);
-        if (current > 0.1 && current < 0.9) {
-            widthNormal = widthNormal / 2;
+        if (current <= 0.15) {
+            layoutParams.setMargins(0, 0, -(int) widthNormal, 0);
+        } else if (current >= 0.85) {
+            layoutParams.setMargins(0, 0, (int) widthNormal, 0);
+        } else {
+            widthNormal=widthNormal/2;
+            layoutParams.setMargins(0, 0, -(int) widthNormal, 0);
         }
-        layoutParams.setMargins(0, 0, -(int) widthNormal, 0);
         this.normalnOffer.setLayoutParams(layoutParams);
         this.normalnOffer.setText(normalText);
     }
