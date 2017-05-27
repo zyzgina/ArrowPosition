@@ -17,8 +17,9 @@ import java.util.List;
 
 public class PricesAssessment extends PercentRelativeLayout {
 
-    private TextView down, normal, up, downTitle, normalTitle, upTitle, currentOffer, downOffer,normalnOffer,upOffer;
+    private TextView down, normal, up, downTitle, normalTitle, upTitle, currentOffer, downOffer, normalnOffer, upOffer;
     private ArrowCanvas downArrow, upArrow, normalArrow;
+    private float current = 0;
 
     public PricesAssessment(Context context) {
         super(context);
@@ -58,8 +59,8 @@ public class PricesAssessment extends PercentRelativeLayout {
 
         //文字
         downOffer = (TextView) view.findViewById(R.id.downOffer);
-        normalnOffer= (TextView) view.findViewById(R.id.normalnOffer);
-        upOffer= (TextView) view.findViewById(R.id.upOffer);
+        normalnOffer = (TextView) view.findViewById(R.id.normalnOffer);
+        upOffer = (TextView) view.findViewById(R.id.upOffer);
     }
 
     public void setProgress(float down, float normal, float up) {
@@ -83,14 +84,14 @@ public class PricesAssessment extends PercentRelativeLayout {
         layoutParams.getPercentLayoutInfo().widthPercent = up;
         this.upTitle.setLayoutParams(layoutParams);
 
-        layoutParams= (LayoutParams) this.downArrow.getLayoutParams();
-        int downArrowWidth=(int)(this.downArrow.getArrowWidth()/3)+5;
-        layoutParams.setMargins(0,0,-downArrowWidth,0);
+        layoutParams = (LayoutParams) this.downArrow.getLayoutParams();
+        int downArrowWidth = (int) (this.downArrow.getArrowWidth() / 3) + 5;
+        layoutParams.setMargins(0, 0, -downArrowWidth, 0);
         this.downArrow.setLayoutParams(layoutParams);
 
-        layoutParams= (LayoutParams) this.upArrow.getLayoutParams();
-        int upArrowWidth=(int)(this.upArrow.getArrowWidth()/3)+5;
-        layoutParams.setMargins(0,0,-upArrowWidth,0);
+        layoutParams = (LayoutParams) this.upArrow.getLayoutParams();
+        int upArrowWidth = (int) (this.upArrow.getArrowWidth() / 3) + 5;
+        layoutParams.setMargins(0, 0, -upArrowWidth, 0);
         this.upArrow.setLayoutParams(layoutParams);
 
         setProgressDownText("");
@@ -108,19 +109,21 @@ public class PricesAssessment extends PercentRelativeLayout {
      */
     public void setProgress(float down, float normal, float up, float current) {
         setProgress(down, normal, up);
+        this.current = current;
         PercentRelativeLayout.LayoutParams layoutParams = (LayoutParams) this.currentOffer.getLayoutParams();
         layoutParams.getPercentLayoutInfo().widthPercent = current;
         this.currentOffer.setLayoutParams(layoutParams);
-        caleCurrentOfferColor(down,normal,current);
+        caleCurrentOfferColor(down, normal, current);
 
-        layoutParams= (LayoutParams) this.normalArrow.getLayoutParams();
-        int normalArrowWidth=(int)(this.normalArrow.getArrowWidth()/3)+5;
-        layoutParams.setMargins(0,0,-normalArrowWidth,0);
+        layoutParams = (LayoutParams) this.normalArrow.getLayoutParams();
+        int normalArrowWidth = (int) (this.normalArrow.getArrowWidth() / 3) + 5;
+        layoutParams.setMargins(0, 0, -normalArrowWidth, 0);
         this.normalArrow.setLayoutParams(layoutParams);
     }
+
     public void setProgressDownText(String downText) {
-        if(isEmpty(downText))
-            downText=this.downOffer.getText().toString();
+        if (isEmpty(downText))
+            downText = this.downOffer.getText().toString();
 
         PercentRelativeLayout.LayoutParams layoutParams = (LayoutParams) this.downOffer.getLayoutParams();
         float widthDown = getTextWidth(this.downOffer, downText) / 3;
@@ -130,20 +133,22 @@ public class PricesAssessment extends PercentRelativeLayout {
     }
 
     public void setProgressNormalText(String normalText) {
-        if(isEmpty(normalText))
-            normalText=this.normalnOffer.getText().toString();
-
-        PercentRelativeLayout.LayoutParams layoutParams= (LayoutParams) this.normalnOffer.getLayoutParams();
-        float widthNormal = getTextWidth(this.normalnOffer, normalText) / 2;
+        if (isEmpty(normalText))
+            normalText = this.normalnOffer.getText().toString();
+        PercentRelativeLayout.LayoutParams layoutParams = (LayoutParams) this.normalnOffer.getLayoutParams();
+        float widthNormal = getTextWidth(this.normalnOffer, normalText);
+        if (current > 0.1 && current < 0.9) {
+            widthNormal = widthNormal / 2;
+        }
         layoutParams.setMargins(0, 0, -(int) widthNormal, 0);
         this.normalnOffer.setLayoutParams(layoutParams);
         this.normalnOffer.setText(normalText);
     }
 
     public void setProgressUpText(String upText) {
-        if(isEmpty(upText))
-            upText=this.upOffer.getText().toString();
-        PercentRelativeLayout.LayoutParams layoutParams= (LayoutParams) this.upOffer.getLayoutParams();
+        if (isEmpty(upText))
+            upText = this.upOffer.getText().toString();
+        PercentRelativeLayout.LayoutParams layoutParams = (LayoutParams) this.upOffer.getLayoutParams();
         float widthUp = getTextWidth(this.upOffer, upText) / 3;
         layoutParams.setMargins(0, 0, -(int) widthUp, 0);
         this.upOffer.setLayoutParams(layoutParams);
@@ -152,17 +157,16 @@ public class PricesAssessment extends PercentRelativeLayout {
 
     /* 计算当前价格的颜色 */
     public void caleCurrentOfferColor(float down, float normal, float current) {
-        if(current<=down){
+        if (current <= down) {
             this.normalArrow.setPaintColor(R.color.check_error);
             this.normalnOffer.setBackgroundResource(R.drawable.button_circular3_check_error);
-        }else if(current>down&&current<=(down+normal)){
+        } else if (current > down && current <= (down + normal)) {
             this.normalArrow.setPaintColor(R.color.check_ok);
             this.normalnOffer.setBackgroundResource(R.drawable.button_circular3_check_ok);
-        }else{
+        } else {
             this.normalArrow.setPaintColor(R.color.yellow);
             this.normalnOffer.setBackgroundResource(R.drawable.button_circular3_yellow);
         }
-
     }
 
     /* 获取TextView的宽度*/
