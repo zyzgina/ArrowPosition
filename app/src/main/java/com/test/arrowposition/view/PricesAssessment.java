@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.test.arrowposition.R;
 
+import java.util.List;
 
 /**
  * Created by Doris on 2017/5/26.
@@ -91,6 +92,10 @@ public class PricesAssessment extends PercentRelativeLayout {
         int upArrowWidth=(int)(this.upArrow.getArrowWidth()/3)+5;
         layoutParams.setMargins(0,0,-upArrowWidth,0);
         this.upArrow.setLayoutParams(layoutParams);
+
+        setProgressDownText("");
+        setProgressNormalText("");
+        setProgressUpText("");
     }
 
     /**
@@ -113,29 +118,31 @@ public class PricesAssessment extends PercentRelativeLayout {
         layoutParams.setMargins(0,0,-normalArrowWidth,0);
         this.normalArrow.setLayoutParams(layoutParams);
     }
-    public void setProgress(float down, float normal, float up, float current, String downText) {
-        setProgress(down, normal, up, current);
+    public void setProgressDownText(String downText) {
+        if(isEmpty(downText))
+            downText=this.downOffer.getText().toString();
+
         PercentRelativeLayout.LayoutParams layoutParams = (LayoutParams) this.downOffer.getLayoutParams();
         float widthDown = getTextWidth(this.downOffer, downText) / 3;
         layoutParams.setMargins(0, 0, -(int) widthDown, 0);
         this.downOffer.setLayoutParams(layoutParams);
         this.downOffer.setText(downText);
-
     }
 
-    public void setProgress(float down, float normal, float up, float current, String downText, String normalText) {
-        setProgress(down, normal, up, current,downText);
+    public void setProgressNormalText(String normalText) {
+        if(isEmpty(normalText))
+            normalText=this.normalnOffer.getText().toString();
+
         PercentRelativeLayout.LayoutParams layoutParams= (LayoutParams) this.normalnOffer.getLayoutParams();
         float widthNormal = getTextWidth(this.normalnOffer, normalText) / 2;
         layoutParams.setMargins(0, 0, -(int) widthNormal, 0);
         this.normalnOffer.setLayoutParams(layoutParams);
         this.normalnOffer.setText(normalText);
-
     }
 
-    public void setProgress(float down, float normal, float up, float current, String downText, String normalText, String upText) {
-        setProgress(down, normal, up, current,downText,normalText);
-
+    public void setProgressUpText(String upText) {
+        if(isEmpty(upText))
+            upText=this.upOffer.getText().toString();
         PercentRelativeLayout.LayoutParams layoutParams= (LayoutParams) this.upOffer.getLayoutParams();
         float widthUp = getTextWidth(this.upOffer, upText) / 3;
         layoutParams.setMargins(0, 0, -(int) widthUp, 0);
@@ -163,5 +170,26 @@ public class PricesAssessment extends PercentRelativeLayout {
         TextPaint textPaint = textView.getPaint();
         float textPaintWidth = textPaint.measureText(text);
         return textPaintWidth;
+    }
+
+    /* 判断字符是否为空 */
+    public static boolean isEmpty(Object object) {
+        if (object == null) {
+            return true;
+        }
+        if (object instanceof String) {
+            if ("".equals(((String) object).trim()) || "null".equals((String) object)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        if (object instanceof List) {
+            return ((List) object).isEmpty();
+        }
+
+        return false;
+
     }
 }
