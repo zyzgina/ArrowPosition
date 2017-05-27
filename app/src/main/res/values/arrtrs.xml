@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 箭头 -->
+    <declare-styleable name="ArrowView">
+        <attr name="direction">
+            <enum name="down" value="0" />
+            <enum name="up" value="1" />
+        </attr>
+        <attr name="color" format="color" />
+    </declare-styleable>
+</resources>

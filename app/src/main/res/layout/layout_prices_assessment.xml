@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/normal"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/common_measure_20sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/down"
+        android:background="@color/check_ok"
+        app:layout_widthPercent="50%" />
+
+    <TextView
+        android:id="@+id/up"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/common_measure_20sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/normal"
+        android:background="@drawable/assessment_up"
+        app:layout_widthPercent="20%" />
+
+    <TextView
+        android:id="@+id/downTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/down"
+        android:layout_marginTop="@dimen/common_measure_10sp"
+        android:gravity="center"
+        android:text="偏低"
+        android:textColor="@color/check_error"
+        app:layout_widthPercent="30%" />
+
+    <TextView
+        android:id="@+id/normalTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/downTitle"
+        android:layout_toRightOf="@id/downTitle"
+        android:gravity="center"
+        android:text="公平交易区间"
+        android:textColor="@color/check_ok"
+        app:layout_widthPercent="50%" />
+
+    <TextView
+        android:id="@+id/upTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/downTitle"
+        android:layout_toRightOf="@id/normalTitle"
+        android:gravity="center"
+        android:text="偏高"
+        android:textColor="@color/yellow"
+        app:layout_widthPercent="20%" />
+
+    <com.test.arrowposition.view.ArrowCanvas
+        android:id="@+id/downArrow"
+        android:layout_below="@id/down"
+        android:layout_alignRight="@id/downTitle"
+        android:gravity="right"
+        android:layout_width="@dimen/common_measure_40sp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/currentOffer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/trans"
+        app:layout_widthPercent="45%"
+        android:layout_above="@id/down"
+        />
+
+    <com.test.arrowposition.view.ArrowCanvas
+        android:id="@+id/normalArrow"
+        android:layout_above="@id/normal"
+        android:layout_alignRight="@id/currentOffer"
+        android:gravity="right"
+        android:layout_width="@dimen/common_measure_40sp"
+        android:layout_height="wrap_content"/>
+
+    <com.test.arrowposition.view.ArrowCanvas
+        android:id="@+id/upArrow"
+        android:layout_below="@id/up"
+        android:layout_alignRight="@id/normalTitle"
+        android:gravity="left"
+        android:layout_width="@dimen/common_measure_40sp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/downOffer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="1.65万"
+        android:layout_below="@id/downArrow"
+        android:layout_alignRight="@id/downArrow"
+        android:layout_marginTop="@dimen/common_measure_5sp"
+        android:textColor="@color/check_error"
+        />
+
+    <TextView
+        android:id="@+id/upOffer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="1.65万"
+        android:layout_below="@id/upArrow"
+        android:layout_alignRight="@id/upArrow"
+        android:layout_marginTop="@dimen/common_measure_5sp"
+        android:textColor="@color/yellow"
+        />
+
+    <TextView
+        android:id="@+id/normalnOffer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="当前报价1.65万"
+        android:background="@drawable/button_circular3_check_ok"
+        android:paddingLeft="@dimen/common_measure_10sp"
+        android:paddingRight="@dimen/common_measure_10sp"
+        android:paddingTop="@dimen/common_measure_5sp"
+        android:paddingBottom="@dimen/common_measure_5sp"
+        android:layout_above="@+id/normalArrow"
+        android:layout_alignRight="@+id/normalArrow"
+        android:layout_alignEnd="@+id/normalArrow"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/down"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/common_measure_20sp"
+        android:background="@drawable/assessment_down"
+        app:layout_widthPercent="30%"
+        android:layout_alignBaseline="@+id/normal"
+        android:layout_alignBottom="@+id/normal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</android.support.percent.PercentRelativeLayout>
