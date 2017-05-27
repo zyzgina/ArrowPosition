@@ -140,7 +140,7 @@ public class PricesAssessment extends PercentRelativeLayout {
         if (current <= 0.15) {
             layoutParams.setMargins(0, 0, -(int) widthNormal, 0);
         } else if (current >= 0.85) {
-            layoutParams.setMargins(0, 0, (int) widthNormal, 0);
+            layoutParams.setMargins(0, 0, 0, 0);
         } else {
             widthNormal=widthNormal/2;
             layoutParams.setMargins(0, 0, -(int) widthNormal, 0);
